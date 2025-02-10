@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -28,21 +29,19 @@ const Footer = () => {
                 viewport={{ once: true }}
                 className="animate_top w-1/2 lg:w-1/4"
               >
-                <a href="/" className="relative">
+                <a
+                  style={{ fontWeight: "bold", fontSize: "22px" }}
+                  href="/"
+                  className="relative"
+                >
                   <Image
-                    width={110}
+                    width={70}
                     height={80}
-                    src="/images/logo/logo-light.svg"
+                    src="/images/Logo.ico"
                     alt="Logo"
-                    className="dark:hidden"
+                    // className="dark:hidden"
                   />
-                  <Image
-                    width={110}
-                    height={80}
-                    src="/images/logo/logo-dark.svg"
-                    alt="Logo"
-                    className="hidden dark:block"
-                  />
+                  Synergi
                 </a>
 
                 <p className="mb-10 mt-5">
@@ -56,7 +55,7 @@ const Footer = () => {
                   href="#"
                   className="text-itemtitle font-medium text-black dark:text-white"
                 >
-                  hello@solid.com
+                  info@synergi.com
                 </a>
               </motion.div>
 
@@ -237,6 +236,18 @@ const Footer = () => {
                       </button>
                     </div>
                   </form>
+
+                  <div
+                    style={{ marginTop: "40px" }}
+                    className="mt-7 flex items-center gap-6 xl:mt-0"
+                  >
+                    <Link
+                      href="/#"
+                      className="flex items-center justify-center rounded-full bg-primary px-7.5 py-2.5 text-regular text-white duration-300 ease-in-out hover:bg-primaryho"
+                    >
+                      Request Demo
+                    </Link>
+                  </div>
                 </motion.div>
               </div>
             </div>

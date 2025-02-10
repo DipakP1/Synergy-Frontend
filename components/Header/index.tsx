@@ -37,21 +37,22 @@ const Header = () => {
     >
       <div className="relative mx-auto max-w-c-1390 items-center justify-between px-4 md:px-8 xl:flex 2xl:px-0">
         <div className="flex w-full items-center justify-between xl:w-1/4">
-          <a href="/">
+          <a style={{ fontSize: "22px", fontWeight: "bold", display:"flex", alignItems:"center", gap:5 }} href="/">
             <Image
-              src="/images/logo/logo-dark.svg"
+              src="/images/Logo.ico"
               alt="logo"
               width={119.03}
               height={30}
               className="hidden w-full dark:block"
             />
-            <Image
+            {/* <Image
               src="/images/logo/logo-light.svg"
               alt="logo"
               width={119.03}
               height={30}
               className="w-full dark:hidden"
-            />
+            /> */}
+            SYNERGI
           </a>
 
           {/* <!-- Hamburger Toggle BTN --> */}
@@ -154,18 +155,18 @@ const Header = () => {
           <div className="mt-7 flex items-center gap-6 xl:mt-0">
             <ThemeToggler />
 
-            <Link
+            {/* <Link
               href="/auth/signin"
               className="text-regular font-medium text-waterloo hover:text-primary"
             >
               Sign In{" "}
-            </Link>
+            </Link> */}
 
             <Link
-              href="/auth/signup"
+              href="/#"
               className="flex items-center justify-center rounded-full bg-primary px-7.5 py-2.5 text-regular text-white duration-300 ease-in-out hover:bg-primaryho"
             >
-              Sign Up
+             Request Demo
             </Link>
           </div>
         </div>
