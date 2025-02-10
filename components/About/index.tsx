@@ -63,12 +63,12 @@ const About = () => {
                 <span className="mb-4 mr-4 inline-flex rounded-full bg-meta px-4.5 py-1 text-metatitle uppercase text-white ">
                   New
                 </span>{" "}
-                SaaS Boilerplate for Next.js
+                Lorem ipsum dolor sit amet,
               </span>
               <h2 className="relative mb-6 text-3xl font-bold text-black dark:text-white xl:text-hero">
-                A Complete Solution for
+                Lorem ipsum dolor sit
                 <span className="relative inline-block before:absolute before:bottom-2.5 before:left-0 before:-z-1 before:h-3 before:w-full before:bg-titlebg dark:before:bg-titlebgdark">
-                  SaaS Startup
+                  Lorem ipsum dolor sit amet,
                 </span>
               </h2>
               <p>
@@ -84,7 +84,8 @@ const About = () => {
                 </div>
                 <div className="w-3/4">
                   <h3 className="mb-0.5 text-metatitle2 text-black dark:text-white">
-                    React 18, Next.js 13 and TypeScript
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et
+                    provident error animi reiciendis, qui molestiae numquam
                   </h3>
                   <p>Ut ultricies lacus non fermentum ultrices.</p>
                 </div>
@@ -97,7 +98,8 @@ const About = () => {
                 </div>
                 <div className="w-3/4">
                   <h3 className="mb-0.5 text-metatitle2 text-black dark:text-white">
-                    Fully Customizable
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Tempora, modi.\
                   </h3>
                   <p>consectetur adipiscing elit fermentum ultricies.</p>
                 </div>
@@ -131,7 +133,7 @@ const About = () => {
               className="animate_left md:w-1/2"
             >
               <h4 className="font-medium uppercase text-black dark:text-white">
-                Launch Your SaaS Fast
+                Launch Your App
               </h4>
               <h2 className="relative mb-6 text-3xl font-bold text-black dark:text-white xl:text-hero">
                 Packed with All Essential {"   "}
