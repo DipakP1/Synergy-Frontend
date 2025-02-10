@@ -157,7 +157,7 @@ const Header = () => {
 
             {/* <Link
               href="/auth/signin"
-              className="text-regular font-medium text-waterloo hover:text-primary"
+     -         className="text-regular font-medium text-waterloo hover:text-primary"
             >
               Sign In{" "}
             </Link> */}
