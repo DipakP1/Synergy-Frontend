@@ -15,9 +15,7 @@ import Testimonial from "@/components/Testimonial";
 
 export const metadata: Metadata = {
   title: "Synergi Solutions, LLC",
-
-  // other metadata
-  description: "This is Home for Solid Pro",
+  description: "This is Home for Synergi Solutions, LLC",
 };
 
 export default function Home() {
