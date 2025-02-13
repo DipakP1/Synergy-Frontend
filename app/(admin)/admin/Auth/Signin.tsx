@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { enqueueSnackbar } from "notistack";
-import { loginAdminService } from "../service/page";
+import { loginAdminService } from "../service/service";
 import { useRouter } from "next/navigation";
 // import { loginAdmin } from "./handleLoginAdmin";
 
