@@ -41,7 +41,9 @@ function Page() {
   useEffect(() => {
     const getEnquiries = async () => {
       try {
-        const res = await axios.get("/api/getMessages");
+        const res = await axios.get(
+          "/api/getMessages",
+        );
 
         console.log(res, "RESPONS");
         setEnquiry(res?.data?.data);
@@ -56,7 +58,7 @@ function Page() {
   return (
     <Box>
       <Header />
-      <Card sx={{ mx:10, my:4, p: 2 }}>
+      <Card sx={{ mx: 10, my: 4, p: 2 }}>
         <Typography variant="h6" color="primary">
           Super Admin Dashboard
         </Typography>

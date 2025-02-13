@@ -26,7 +26,6 @@ const Signin = () => {
   const loginAdmin = async (data: any) => {
     try {
       const res: any = await loginAdminService(data);
-      console.log(res, "AFTER LOGIN");
       if (res?.error) {
         enqueueSnackbar("Invalid Credentials", {
           variant: "error",
