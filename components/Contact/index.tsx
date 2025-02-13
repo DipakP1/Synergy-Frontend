@@ -1,20 +1,54 @@
 "use client";
+import axios from "axios";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { enqueueSnackbar } from "notistack";
 import React from "react";
+import { useForm } from "react-hook-form";
 
 const Contact = () => {
-  /**
-   * Source: https://www.joshwcomeau.com/react/the-perils-of-rehydration/
-   * Reason: To fix rehydration error
-   */
+  const {
+    register,
+    formState: { errors },
+    watch,
+    handleSubmit,
+  } = useForm();
   const [hasMounted, setHasMounted] = React.useState(false);
   React.useEffect(() => {
     setHasMounted(true);
   }, []);
+
   if (!hasMounted) {
     return null;
   }
+
+  const submitMessage = async (data: any) => {
+    console.log(data, "DATATA");
+    try {
+      const res: any = await axios.post("/api/sendMessage", data);
+      console.log(res, "RESoPSTET");
+
+      if (!res.data.error) {
+        enqueueSnackbar(res.data.message, {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "bottom",
+            horizontal: "center",
+          },
+        });
+      } else {
+        enqueueSnackbar(res.data.message, {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "bottom",
+            horizontal: "center",
+          },
+        });
+      }
+    } catch (error) {
+      console.error(error, "ERROR WHILE SUBMITING MESSAGE");
+    }
+  };
 
   return (
     <>
@@ -63,17 +97,20 @@ const Contact = () => {
               <form
                 // action="https://formbold.com/s/unique_form_id"
                 // method="POST"
+                onSubmit={handleSubmit(submitMessage)}
               >
                 <div className="mb-7.5 flex flex-col gap-7.5 lg:flex-row lg:justify-between lg:gap-14">
                   <input
                     type="text"
                     placeholder="Full name"
+                    {...register("name")}
                     className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
                   />
 
                   <input
                     type="email"
                     placeholder="Email address"
+                    {...register("email")}
                     className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
                   />
                 </div>
@@ -82,12 +119,14 @@ const Contact = () => {
                   <input
                     type="text"
                     placeholder="Subject"
+                    {...register("subject")}
                     className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
                   />
 
                   <input
                     type="text"
                     placeholder="Phone number"
+                    {...register("phoneNo")}
                     className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
                   />
                 </div>
@@ -96,12 +135,13 @@ const Contact = () => {
                   <textarea
                     placeholder="Message"
                     rows={4}
+                    {...register("message")}
                     className="w-full border-b border-stroke bg-transparent focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white"
                   ></textarea>
                 </div>
 
                 <div className="flex flex-wrap gap-4 xl:justify-between ">
-                  <div className="mb-4 flex md:mb-0">
+                  {/* <div className="mb-4 flex md:mb-0">
                     <input
                       id="default-checkbox"
                       type="checkbox"
@@ -131,7 +171,7 @@ const Contact = () => {
                       By clicking Checkbox, you agree to use our “Form” terms
                       And consent cookie usage in browser.
                     </label>
-                  </div>
+                  </div> */}
 
                   <button
                     aria-label="send message"

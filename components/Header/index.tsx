@@ -39,20 +39,20 @@ const Header = () => {
         <div className="flex w-full items-center justify-between xl:w-1/4">
           <a style={{ fontSize: "22px", fontWeight: "bold", display:"flex", alignItems:"center", gap:5 }} href="/">
             <Image
-              src="/images/Logo.ico"
+              src="/images/logo/logo.png"
               alt="logo"
-              width={119.03}
-              height={30}
+              width={120.03}
+              height={40}
               className="hidden w-full dark:block"
             />
-            {/* <Image
-              src="/images/logo/logo-light.svg"
+            <Image
+              src="/images/logo/logo.png"
               alt="logo"
-              width={119.03}
-              height={30}
+              width={120.03}
+              height={40}
               className="w-full dark:hidden"
-            /> */}
-            SYNERGI
+            />
+            {/* SYNERGI */}
           </a>
 
           {/* <!-- Hamburger Toggle BTN --> */}

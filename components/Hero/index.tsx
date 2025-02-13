@@ -19,14 +19,14 @@ const Hero = () => {
                 Synergi Solutions, LLC
               </h4>
               <h1 className="mb-5 pr-16 text-3xl font-bold text-black dark:text-white xl:text-hero ">
-                Smart Solutions for a Better Profitable Business
+                Smart Solutions for a Profitable Healthcare Business
                 {/* <span className="relative inline-block before:absolute before:bottom-2.5 before:left-0 before:-z-1 before:h-3 before:w-full before:bg-titlebg dark:before:bg-titlebgdark ">
                   SaaS
                 </span> */}
               </h1>
               <p>
                 We help you boost efficiencies, reputation, savings, quality,
-                and profitability in the healthcare mental health arenas
+                and profitability in the healthcare arenas
               </p>
 
               <div className="mt-10">
