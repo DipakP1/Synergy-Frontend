@@ -4,30 +4,30 @@ const featuresData: Feature[] = [
   {
     id: 1,
     icon: "/images/icon/icon-01.svg",
-    title: "Intelligent",
+    title: "Intelligent Solutions",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
+      "Optimize AI-powered solutions to reduce costs, increase capabilities, improve decision-making, and maximize intelligence for your business.",
   },
   {
     id: 2,
     icon: "/images/icon/icon-02.svg",
-    title: "Image",
+    title: "Impactful Solutions",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
+      "Strategize with our experienced leadership team to expand your profits, eliminate waste, and leverage growth opportunities.",
   },
   {
     id: 3,
     icon: "/images/icon/icon-03.svg",
-    title: "Innovate ",
+    title: "Innovative Solutions ",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
+      "Modernize your business through forward-looking technologies, proposals, and ancillary services that drive lasting success.",
   },
   {
     id: 4,
     icon: "/images/icon/icon-04.svg",
-    title: "Impactful solutions",
+    title: "Image-Based Solutions",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
+      "Enhance the look of your enterprise with solutions that protect and highlight your reputation to patients, providers, and the community.",
   },
 ];
 

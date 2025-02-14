@@ -1,24 +1,18 @@
-import { pool } from "../utils/DB_Connections";
+import { pool } from "./utils/DB_Connections";
 
-export async function GET(req: Request) {
+export async function GET(req: Request, res: Response) {
   try {
     console.log("Attempting to connect to the database...");
     const query = `SELECT * FROM messages;`;
 
     const client = await pool.connect();
-
-    const result = await client.query(query);
-
-    const data = result.rows;
-    client.release();
-    
+    console.log("Connected to the database");
     return new Response(
       JSON.stringify({
-        message: "Users fetched successfully!",
-        data: data,
+        message: "server is running & database is connected!",
         error: false,
       }),
-      { status: 200 } // Changed from 201 to 200
+      { status: 200 },
     );
   } catch (error: any) {
     console.error("Database Query Error:", error.message);

@@ -35,13 +35,13 @@ const Footer = () => {
                   className="relative"
                 >
                   <Image
-                    width={70}
-                    height={80}
-                    src="/images/Logo.ico"
+                    width={100}
+                    height={90}
+                    src="/images/logo/logo.png"
                     alt="Logo"
                     // className="dark:hidden"
                   />
-                  Synergi
+                  {/* Synergi */}
                 </a>
 
                 <p className="mb-10 mt-5">

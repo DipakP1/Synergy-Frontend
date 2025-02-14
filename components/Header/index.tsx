@@ -29,30 +29,29 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed left-0 top-0 z-99999 w-full py-7 ${
+      className={`fixed left-0 top-0 z-99999  w-full py-2 ${
         stickyMenu
           ? "bg-white !py-4 shadow transition duration-100 dark:bg-black"
           : ""
       }`}
     >
-      <div className="relative mx-auto max-w-c-1390 items-center justify-between px-4 md:px-8 xl:flex 2xl:px-0">
+      <div className="border-b-grey-400 relative mx-auto max-w-c-1390 items-center justify-between px-4 md:px-8 xl:flex 2xl:px-0">
         <div className="flex w-full items-center justify-between xl:w-1/4">
-          <a style={{ fontSize: "22px", fontWeight: "bold", display:"flex", alignItems:"center", gap:5 }} href="/">
+          <a style={{}} href="/">
             <Image
               src="/images/logo/logo.png"
               alt="logo"
-              width={120.03}
-              height={40}
+              width={100.03}
+              height={20}
               className="hidden w-full dark:block"
             />
             <Image
               src="/images/logo/logo.png"
               alt="logo"
-              width={120.03}
-              height={40}
-              className="w-full dark:hidden"
+              width={130.03}
+              height={20}
+              className="dark:hidden"
             />
-            {/* SYNERGI */}
           </a>
 
           {/* <!-- Hamburger Toggle BTN --> */}
@@ -166,7 +165,7 @@ const Header = () => {
               href="/#"
               className="flex items-center justify-center rounded-full bg-primary px-7.5 py-2.5 text-regular text-white duration-300 ease-in-out hover:bg-primaryho"
             >
-             Request Demo
+              Request Demo
             </Link>
           </div>
         </div>
