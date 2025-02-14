@@ -1,11 +1,9 @@
 import { pool } from "./utils/DB_Connections";
 
-export async function GET(req: Request, res: Response) {
+export async function GET() {
   try {
     console.log("Attempting to connect to the database...");
-    const query = `SELECT * FROM messages;`;
 
-    const client = await pool.connect();
     console.log("Connected to the database");
     return new Response(
       JSON.stringify({
