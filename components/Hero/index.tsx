@@ -59,7 +59,7 @@ const Hero = () => {
                   alt="shape"
                   width={46}
                   height={246}
-                  className="absolute -left-11.5 top-0"
+                  className="absolute -left-12 top-0"
                 />
                 <Image
                   src="/images/shape/shape-02.svg"
@@ -75,8 +75,8 @@ const Hero = () => {
                   height={21.66}
                   className="absolute -right-6.5 bottom-0 z-1"
                 />
-                <div className=" relative aspect-[700/444] w-full">
-                  <Image
+                <div className=" relative aspect-[900/444] w-full">
+                  {/* <Image
                     className="hidden shadow-solid-l dark:block"
                     src="/images/hero/hero-dark.svg"
                     alt="Hero"
@@ -87,7 +87,22 @@ const Hero = () => {
                     src="/images/hero/hero-light.svg"
                     alt="Hero"
                     fill
-                  />
+                  /> */}
+
+                  <video
+                    style={{ borderRadius: "20px" }}
+                    preload="auto"
+                    autoPlay
+                    loop
+                    playsInline
+                    controls
+                    width="600"
+                  >
+                    <source
+                      src="/images/hero/heroSection.mp4"
+                      type="video/mp4"
+                    />
+                  </video>
                 </div>
               </div>
             </div>
