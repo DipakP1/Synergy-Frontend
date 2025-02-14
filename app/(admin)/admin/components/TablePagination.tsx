@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { Box, IconButton, MenuItem, Select, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -10,13 +12,7 @@ const CustomPagination = ({
   onRowsPerPageChange,
 }: any) => {
   return (
-    <Box
-      sx={{
-        width: "100%",
-
-        textAlign: "left",
-      }}
-    >
+    <Box>
       {/* Rows Per Page at Top */}
       <Box
         sx={{
@@ -43,7 +39,7 @@ const CustomPagination = ({
             },
           }}
         >
-          {[10, 20, 30].map((rows) => (
+          {[5, 10, 20, 30].map((rows) => (
             <MenuItem key={rows} value={rows}>
               {rows}
             </MenuItem>

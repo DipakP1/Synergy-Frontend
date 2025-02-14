@@ -33,17 +33,19 @@ function Page() {
       label: "Message",
     },
     {
-      id: "action",
-      label: "Action",
+      id: "created_at",
+      label: "Date",
     },
+    // {
+    //   id: "action",
+    //   label: "Action",
+    // },
   ];
 
   useEffect(() => {
     const getEnquiries = async () => {
       try {
-        const res = await axios.get(
-          "/api/getMessages",
-        );
+        const res = await axios.get("/api/getMessages");
 
         console.log(res, "RESPONS");
         setEnquiry(res?.data?.data);

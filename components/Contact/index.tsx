@@ -12,15 +12,9 @@ const Contact = () => {
     formState: { errors },
     watch,
     handleSubmit,
+    reset,
   } = useForm();
-  const [hasMounted, setHasMounted] = React.useState(false);
-  React.useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  if (!hasMounted) {
-    return null;
-  }
+  const error: any = errors;
 
   const submitMessage = async (data: any) => {
     console.log(data, "DATATA");
@@ -36,6 +30,7 @@ const Contact = () => {
             horizontal: "center",
           },
         });
+        reset();
       } else {
         enqueueSnackbar(res.data.message, {
           variant: "error",
@@ -49,6 +44,8 @@ const Contact = () => {
       console.error(error, "ERROR WHILE SUBMITING MESSAGE");
     }
   };
+
+  console.log(error, "ERRORS");
 
   return (
     <>
@@ -94,50 +91,81 @@ const Contact = () => {
                 Send a message
               </h2>
 
-              <form
-                // action="https://formbold.com/s/unique_form_id"
-                // method="POST"
-                onSubmit={handleSubmit(submitMessage)}
-              >
-                <div className="mb-7.5 flex flex-col gap-7.5 lg:flex-row lg:justify-between lg:gap-14">
-                  <input
-                    type="text"
-                    placeholder="Full name"
-                    {...register("name")}
-                    className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
-                  />
+              <form onSubmit={handleSubmit(submitMessage)}>
+                <div className="mb-7.5 flex w-full flex-col gap-7.5 lg:flex-row lg:justify-between lg:gap-14">
+                  <div className="w-full">
+                    <input
+                      type="text"
+                      placeholder="Full name"
+                      {...register("name", { required: "Name is required" })}
+                      className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-full"
+                      // error={!!error?.name}
+                    />
+                    <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
+                      {error?.name?.message}
+                    </span>
+                  </div>
 
-                  <input
-                    type="email"
-                    placeholder="Email address"
-                    {...register("email")}
-                    className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
-                  />
+                  <div className="w-full">
+                    <input
+                      type="email"
+                      placeholder="Email address"
+                      {...register("email", {
+                        required: "Email is required",
+                        pattern: {
+                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                          message: "invalid email address",
+                        },
+                      } as any)}
+                      className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-full"
+                    />
+                    <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
+                      {error?.email?.message}
+                    </span>
+                  </div>
                 </div>
 
                 <div className="mb-12.5 flex flex-col gap-7.5 lg:flex-row lg:justify-between lg:gap-14">
-                  <input
-                    type="text"
-                    placeholder="Subject"
-                    {...register("subject")}
-                    className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
-                  />
-
-                  <input
-                    type="text"
-                    placeholder="Phone number"
-                    {...register("phoneNo")}
-                    className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
-                  />
+                  <div className="w-full">
+                    <input
+                      type="text"
+                      placeholder="Subject"
+                      {...register("subject", {
+                        required: "Subject is required",
+                      })}
+                      className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-full"
+                    />
+                    <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
+                      {error?.subject?.message}
+                    </span>
+                  </div>
+                  <div className="w-full">
+                    <input
+                      type="text"
+                      placeholder="Phone number"
+                      {...register("phoneNo", {
+                        required: "Mobile No is required",
+                      })}
+                      className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-full"
+                    />
+                    <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
+                      {error?.phoneNo?.message}
+                    </span>
+                  </div>
                 </div>
 
-                <div className="mb-11.5 flex">
+                <div className="mb-11.5 flex flex-col">
                   <textarea
                     placeholder="Message"
                     rows={4}
-                    {...register("message")}
+                    {...register("message", {
+                      required: "Message is required",
+                    })}
                     className="w-full border-b border-stroke bg-transparent focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white"
                   ></textarea>
+                  <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
+                    {error?.message?.message}
+                  </span>
                 </div>
 
                 <div className="flex flex-wrap gap-4 xl:justify-between ">
@@ -174,6 +202,7 @@ const Contact = () => {
                   </div> */}
 
                   <button
+                    type="submit"
                     aria-label="send message"
                     className="inline-flex items-center gap-2.5 rounded-full bg-black px-6 py-3 font-medium text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark"
                   >

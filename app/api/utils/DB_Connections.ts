@@ -1,9 +1,19 @@
 import { Pool } from "pg";
+import dotenv from "dotenv";
+
+dotenv.config(); 
 
 export const pool = new Pool({
-  user: "postgres",
-  host: "13.233.244.159",
-  database: "Synergi-Solutions-DB",
-  password: "postgres",
-  port: 5432,
+  user: process.env.DATABASE_USER,
+  host: process.env.DATABASE_HOST,
+  database: process.env.DATABASE_NAME,
+  password: process.env.DATABASE_PASSWORD,
+  port: Number(process.env.DATABASE_PORT),
+  ssl:
+    process.env.DATABASE_SSL === "true" ? { rejectUnauthorized: false } : false, 
 });
+
+pool
+  .connect()
+  .then(() => console.log("Database connected successfully"))
+  .catch((err) => console.error("Database connection error:", err));

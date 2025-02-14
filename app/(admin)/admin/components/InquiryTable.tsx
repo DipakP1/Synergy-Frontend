@@ -17,6 +17,8 @@ import {
   Chip,
   FormControl,
   InputLabel,
+  ListItemText,
+  Menu,
   MenuItem,
   OutlinedInput,
   Select,
@@ -32,6 +34,10 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import ViewUserMessage from "./ViewUserMessage";
+import TablePaginationActions from "@mui/material/TablePagination/TablePaginationActions";
+import { enqueueSnackbar } from "notistack";
+import { exportdataExcel, exportToPdf } from "./Export/exportData";
+import dayjs from "dayjs";
 
 type Order = "asc" | "desc";
 
@@ -165,10 +171,13 @@ function InquiryTable({ rows, headCell }: any) {
   const [orderBy, setOrderBy] = React.useState<any>(headCell[0]?.id);
   const [selected, setSelected] = React.useState<readonly number[]>([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [open, setOpen] = React.useState(false);
-
+  const [startDate, setStartDate] = React.useState("");
+  const [endDate, setEndDate] = React.useState("");
   const [selectedUser, setSelectedUser] = React.useState({});
+  const [anchorEl2, setAnchorEl2] = React.useState(null);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const handleCloseEditDialog = () => {
     setOpen(false);
@@ -225,34 +234,86 @@ function InquiryTable({ rows, headCell }: any) {
     setPage(0);
   };
 
+  const formatDate = (dateString: string) => {
+    // return dayjs(dateString).format("DD-MM-YYYY HH:mm");
+    return dayjs(dateString).format("DD-MM-YYYY");
+  };
+
   const icon = rows?.map((icon, index) => ({
     ...icon,
     id: index + 1,
-    action: (
-      <>
-        <IconButton
-          color="info"
-          onClick={() => {
-            setSelectedUser(icon);
-            setOpen(true);
-          }}
-          sx={{ border: "1px solid #ececec", borderRadius: "10px" }}
-        >
-          <VisibilityOutlinedIcon />
-        </IconButton>
-      </>
-    ),
+    // action: (
+    //   <IconButton
+    //     color="info"
+    //     onClick={() => {
+    //       setSelectedUser(icon);
+    //       setOpen(true);
+    //     }}
+    //     sx={{
+    //       border: "1px solid #ececec",
+    //       m: 0,
+    //       borderRadius: "10px",
+    //     }}
+    //   >
+    //     <VisibilityOutlinedIcon sx={{ fontSize: "16px", m: 0, p: 0 }} />
+    //   </IconButton>
+    // ),
   }));
+  const filteredRows = icon.filter((row) => {
+    const rowDate = dayjs(row.created_at);
+    const isAfterStartDate = startDate
+      ? rowDate.isAfter(dayjs(startDate))
+      : true;
+    const isBeforeEndDate = endDate ? rowDate.isBefore(dayjs(endDate)) : true;
+    return isAfterStartDate && isBeforeEndDate;
+  });
 
   const visibleRows = React.useMemo(
     () =>
-      [...icon]
+      [...filteredRows]
         .sort(getComparator(order, orderBy))
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-    [order, orderBy, page, rowsPerPage, icon],
+    [order, orderBy, page, rowsPerPage, filteredRows],
   );
 
-  console.log(visibleRows, "visibleRows");
+  const GeneratePDF = async (headers: string[], fileName: string) => {
+    try {
+      if (Array.isArray(rows) && rows.length > 0) {
+        await exportToPdf(rows, "pdf", headers, fileName);
+      } else {
+        enqueueSnackbar("No data Available", {
+          variant: "error",
+        });
+      }
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+
+  const ExportDataIntoExcel = async (
+    title?: string,
+    worksheetname?: string,
+  ) => {
+    try {
+      if (Array.isArray(rows) && rows.length > 0) {
+        exportdataExcel(rows, "excel", title, worksheetname);
+      }
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+
+  const handleClick2 = (event: any) => {
+    setAnchorEl2(event.currentTarget);
+    setIsOpen((isOpen: any) => !isOpen);
+  };
+  const handleClose2 = () => {
+    setAnchorEl2(null);
+  };
+  const resetFilters = () => {
+    setStartDate("");
+    setEndDate("");
+  };
 
   return (
     <>
@@ -264,33 +325,98 @@ function InquiryTable({ rows, headCell }: any) {
             alignItems: "center",
             justifyContent: "space-between",
             // gap: 1,
-            mb: 2,
           }}
-        >
-          {/* <Grid
-            textAlign={"left"}
-            display={"flex"}
-            // alignItems={"center"}
-            gap={2}
-            size={{ xs: 12, sm: 6 }}
+        ></Grid>
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Button
+            size="small"
+            variant="contained"
+            onClick={handleClick2}
+            style={{ cursor: "pointer", margin: "10px 0" }}
           >
-            {selected.length > 0 && (
-              <Tooltip title="Delete">
-                <Button
-                  variant="outlined"
-                  size="small"
-                  endIcon={<DeleteIcon sx={{ fontSize: "18px" }} />}
-                >
-                  {selected.length > 0 ? (
-                    <Typography variant="body2">
-                      {selected.length} selected
-                    </Typography>
-                  ) : null}
-                </Button>
-              </Tooltip>
-            )}
-          </Grid> */}
-        </Grid>
+            Export
+          </Button>
+
+          {isOpen && (
+            <Menu
+              id="msgs-menu"
+              anchorEl={anchorEl2}
+              keepMounted
+              open={Boolean(anchorEl2)}
+              onClose={handleClose2}
+              anchorOrigin={{
+                horizontal: "right",
+                vertical: "bottom",
+              }}
+              transformOrigin={{
+                horizontal: "right",
+                vertical: "top",
+              }}
+              sx={{
+                "& .MuiMenu-paper": {
+                  width: "200px",
+                  color: "#131121",
+                },
+              }}
+            >
+              <MenuItem
+                onClick={() =>
+                  GeneratePDF(
+                    [
+                      "Id",
+                      "name",
+                      "email",
+                      "subject",
+                      "phone_no",
+                      "message",
+                      "created_at",
+                    ],
+                    "Users List",
+                  )
+                }
+              >
+                <ListItemText> Export to Pdf </ListItemText>
+              </MenuItem>
+              <MenuItem
+                onClick={(event) =>
+                  ExportDataIntoExcel("Users List", "users sheet")
+                }
+              >
+                <ListItemText> Export To excel </ListItemText>
+              </MenuItem>
+            </Menu>
+          )}
+        </Box>
+
+        {/* Date Filter Inputs */}
+        <Box display="flex" gap={2} mb={2}>
+          <TextField
+            size="small"
+            label="From Date"
+            type="date"
+            InputLabelProps={{ shrink: true }}
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+          <TextField
+            size="small"
+            label="To Date"
+            type="date"
+            InputLabelProps={{ shrink: true }}
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+          {startDate && endDate && (
+            <Button
+              size="small"
+              color="warning"
+              variant="outlined"
+              onClick={resetFilters}
+            >
+              Reset
+            </Button>
+          )}
+        </Box>
 
         <TableContainer
           sx={{
@@ -310,33 +436,36 @@ function InquiryTable({ rows, headCell }: any) {
               onRequestSort={handleRequestSort}
             />
             <TableBody>
-              {visibleRows.map((row: any, index: number) => (
-                <TableRow
-                  hover
-                  key={index}
-                  selected={selected.includes(index)}
-                  onClick={(event) => handleClick(event, index)}
-                >
-                  {headCell.map((headCell: any) => {
-                    return (
-                      <TableCell
-                        key={headCell.id as string}
-                        sx={{
-                          fontWeight: "500",
-                          fontSize: "12px",
-                          borderBottom: "1px solid #ececec",
-                        }}
-                        align={headCell.numeric ? "left" : "left"}
-                      >
-                        {row[headCell.id]}
-                      </TableCell>
-                    );
-                  })}
+              {visibleRows.map((row, index) => (
+                <TableRow key={index}>
+                  {headCell.map((headCell) => (
+                    <TableCell key={headCell.id as string}>
+                      {headCell.id === "created_at"
+                        ? formatDate(row[headCell.id])
+                        : row[headCell.id]}
+                    </TableCell>
+                  ))}
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
+      </Box>
+      <Box display={"flex"} alignItems={"center"} my={2}>
+        <CustomPagination
+          count={icon.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+        <CustomPaginationNumber
+          count={icon.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </Box>
 
       <ViewUserMessage

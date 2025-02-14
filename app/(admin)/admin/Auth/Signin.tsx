@@ -42,6 +42,7 @@ const Signin = () => {
             horizontal: "center",
           },
         });
+        
         router.push("/admin/dashboard");
       }
     } catch (error) {
