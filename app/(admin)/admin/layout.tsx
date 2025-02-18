@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import "../../globals.css";
 const inter = Inter({ subsets: ["latin"] });
 import { SnackbarProvider } from "notistack";
-import { useState, useEffect } from "react";
+
 
 export default function RootLayout({
   children,

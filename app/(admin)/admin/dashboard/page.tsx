@@ -1,5 +1,5 @@
 "use client";
-import { Box, Card, Paper, Typography } from "@mui/material";
+import { Box, Card, Container, Paper, Typography } from "@mui/material";
 import Header from "../components/Header";
 import InquiryTable from "../components/InquiryTable";
 import axios from "axios";
@@ -57,12 +57,14 @@ function Page() {
   return (
     <Box>
       <Header />
-      <Card sx={{ mx: 10, my: 4, p: 2 }}>
-        <Typography variant="h6" color="primary">
-          Super Admin Dashboard
-        </Typography>
-        <InquiryTable rows={enquiry} headCell={headCell} />
-      </Card>
+      <Container maxWidth="xl">
+        <Card sx={{ my: 4, p: 2 }}>
+          <Typography variant="h6" color="primary">
+            Super Admin Dashboard
+          </Typography>
+          <InquiryTable rows={enquiry} headCell={headCell} />
+        </Card>
+      </Container>
     </Box>
   );
 }

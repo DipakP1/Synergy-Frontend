@@ -18,6 +18,8 @@ import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
+import Image from "next/image";
+import ThemeToggler from "@/components/Header/ThemeToggler";
 
 const pages = ["Super Admin", "Dashboard"];
 
@@ -46,7 +48,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar sx={{ backgroundColor: "#2f3868" }} position="static">
+    <AppBar sx={{ backgroundColor: "#cfd6f959" }} position="static">
       <Container maxWidth="xl">
         <Toolbar
           sx={{
@@ -62,7 +64,7 @@ const Header = () => {
               alignItems: "center",
             }}
           >
-            <AdbIcon
+            {/* <AdbIcon
               sx={{
                 display: {
                   xs: "none",
@@ -71,8 +73,14 @@ const Header = () => {
                 },
                 mr: 1,
               }}
+            /> */}
+            <Image
+              src={"/images/logo/logo.png"}
+              alt="Logo"
+              width={100}
+              height={100}
             />
-            <Typography
+            {/* <Typography
               variant="h6"
               noWrap
               component="a"
@@ -87,53 +95,61 @@ const Header = () => {
               }}
             >
               Synergi Solutions
-            </Typography>
+            </Typography> */}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem
-                onClick={() => router.push("/admin/dashboard/change-password")}
-              >
-                <Typography sx={{ textAlign: "center" }}>
-                  Change Password
-                </Typography>
-              </MenuItem>
+          <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center", gap:2,justifyContent:"space-between" }}>
+            <ThemeToggler />
 
-              <MenuItem
-                onClick={async () => {
-                  const res = await axios.post("/api/logout");
-                  if (!res.data.error) {
-                    enqueueSnackbar(res?.data?.message, { variant: "success" });
-                    router.push("/admin/login");
-                  } else {
-                    enqueueSnackbar(res?.data?.message, { variant: "error" });
-                  }
+            <Box ml={2}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
                 }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
               >
-                <Typography sx={{ textAlign: "center" }}>Logout</Typography>
-              </MenuItem>
-            </Menu>
+                <MenuItem
+                  onClick={() =>
+                    router.push("/admin/dashboard/change-password")
+                  }
+                >
+                  <Typography sx={{ textAlign: "center" }}>
+                    Change Password
+                  </Typography>
+                </MenuItem>
+
+                <MenuItem
+                  onClick={async () => {
+                    const res = await axios.post("/api/logout");
+                    if (!res.data.error) {
+                      enqueueSnackbar(res?.data?.message, {
+                        variant: "success",
+                      });
+                      router.push("/admin/login");
+                    } else {
+                      enqueueSnackbar(res?.data?.message, { variant: "error" });
+                    }
+                  }}
+                >
+                  <Typography sx={{ textAlign: "center" }}>Logout</Typography>
+                </MenuItem>
+              </Menu>
+            </Box>
           </Box>
         </Toolbar>
       </Container>
