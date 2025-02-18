@@ -38,13 +38,12 @@ export async function POST(req: Request) {
   const crypto = new NextCrypto(secretKey);
   const encrypted = await crypto.encrypt(id);
 
-
   console.log(encrypted, "encriptID");
 
   const html = `
     <p>Hi, Super Admin,</p>
     <p>Here's your password recovery link</p>
-    <a href="http://localhost:3000/admin/login/reset-password?id=${encrypted}">Reset password here</a>
+    <a href="${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/login/reset-password?id=${encrypted}">Reset password here</a>
     <p>Best regards, Synergi</p>
   `;
 
