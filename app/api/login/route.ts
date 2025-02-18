@@ -35,18 +35,20 @@ export async function POST(req: Request) {
       );
     }
 
-    const token = jwt.sign({ email: existingUser.email }, SECRET_KEY, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { email: existingUser.email, id: existingUser.id },
+      SECRET_KEY,
+      {
+        expiresIn: "1h",
+      },
+    );
 
-    (await cookies()).set("token", token,
-       {
+    (await cookies()).set("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       path: "/",
-    }
-  );
+    });
 
     return NextResponse.json(
       { message: "User logged in successfully!", error: false },

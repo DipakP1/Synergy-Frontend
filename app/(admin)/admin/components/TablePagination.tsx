@@ -39,7 +39,7 @@ const CustomPagination = ({
             },
           }}
         >
-          {[5, 10, 20, 30].map((rows) => (
+          {[10, 20, 30, 40].map((rows) => (
             <MenuItem key={rows} value={rows}>
               {rows}
             </MenuItem>

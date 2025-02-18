@@ -15,6 +15,9 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { cookies } from "next/headers";
 import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
+import axios from "axios";
+import { enqueueSnackbar } from "notistack";
 
 const pages = ["Super Admin", "Dashboard"];
 
@@ -109,13 +112,23 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography sx={{ textAlign: "center" }}>Change Password</Typography>
-              </MenuItem>
-            
               <MenuItem
-                onClick={() => {
-                  router.push("/admin/login");
+                onClick={() => router.push("/admin/dashboard/change-password")}
+              >
+                <Typography sx={{ textAlign: "center" }}>
+                  Change Password
+                </Typography>
+              </MenuItem>
+
+              <MenuItem
+                onClick={async () => {
+                  const res = await axios.post("/api/logout");
+                  if (!res.data.error) {
+                    enqueueSnackbar(res?.data?.message, { variant: "success" });
+                    router.push("/admin/login");
+                  } else {
+                    enqueueSnackbar(res?.data?.message, { variant: "error" });
+                  }
                 }}
               >
                 <Typography sx={{ textAlign: "center" }}>Logout</Typography>

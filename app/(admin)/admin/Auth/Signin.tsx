@@ -8,10 +8,11 @@ import { useForm } from "react-hook-form";
 import { enqueueSnackbar } from "notistack";
 import { loginAdminService } from "../service/service";
 import { useRouter } from "next/navigation";
+import RecoverPassword from "./RecoveryDialog";
 // import { loginAdmin } from "./handleLoginAdmin";
 
 const Signin = () => {
-  const router = useRouter()
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -20,9 +21,15 @@ const Signin = () => {
   } = useForm({
     values: { email: "admin@gmail.com", password: "admin123" },
   });
+  const [showPassword1, setShowPassword1] = useState(false);
 
   const error: any = errors;
- 
+
+  const [openDialog, setOpenDialog] = useState(false);
+  const closeDialog = () => {
+    setOpenDialog(false);
+  };
+
   const loginAdmin = async (data: any) => {
     try {
       const res: any = await loginAdminService(data);
@@ -42,14 +49,18 @@ const Signin = () => {
             horizontal: "center",
           },
         });
-        
+
         router.push("/admin/dashboard");
       }
     } catch (error) {
       console.log(error, "ERROR WHILE LOGIN");
     }
   };
-  
+
+  const handleClickShowPassword = () => {
+    setShowPassword1(!showPassword1);
+  };
+
   return (
     <>
       {/* <!-- ===== SignIn Form Start ===== --> */}
@@ -114,7 +125,7 @@ const Signin = () => {
 
                 <div className="w-full">
                   <input
-                    type="password"
+                    type={!showPassword1 ? "password" : "text"}
                     placeholder="Password"
                     {...register("password", {
                       required: "Password is required",
@@ -125,12 +136,30 @@ const Signin = () => {
                   <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
                     {error?.password?.message}
                   </span>
+                  <div className="mt-4 flex">
+                    <input
+                      data-hs-toggle-password='{
+                        "target": "#hs-toggle-password-with-checkbox"
+                      }'
+                      id="hs-toggle-password-checkbox"
+                      type="checkbox"
+                      onClick={handleClickShowPassword}
+                      checked={showPassword1}
+                      className="mt-0.5 shrink-0 rounded border-gray-200 text-blue-600 focus:ring-blue-500 dark:border-neutral-700 dark:bg-neutral-800 dark:checked:border-blue-500 dark:checked:bg-blue-500 dark:focus:ring-offset-gray-800"
+                    />
+                    <label
+                      htmlFor="hs-toggle-password-checkbox"
+                      className="ms-3 text-sm text-gray-500 dark:text-neutral-400"
+                    >
+                      Show password
+                    </label>
+                  </div>
                 </div>
               </div>
 
               <div className="flex flex-wrap items-center gap-10 md:justify-between xl:gap-15">
                 <div className="flex flex-wrap gap-4 md:gap-10">
-                  <div className="mb-4 flex items-center">
+                  {/* <div className="mb-4 flex items-center">
                     <input
                       id="default-checkbox"
                       type="checkbox"
@@ -159,9 +188,12 @@ const Signin = () => {
                     >
                       Keep me signed in
                     </label>
-                  </div>
+                  </div> */}
 
-                  <a href="#" className="hover:text-primary">
+                  <a
+                    onClick={() => setOpenDialog(true)}
+                    className="cursor-pointer hover:text-primary"
+                  >
                     Forgot Password?
                   </a>
                 </div>
@@ -191,6 +223,8 @@ const Signin = () => {
         </div>
       </section>
       {/* <!-- ===== SignIn Form End ===== --> */}
+
+      <RecoverPassword open={openDialog} close={closeDialog} />
     </>
   );
 };

@@ -22,6 +22,7 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
+  Stack,
   TableContainer,
   TextField,
   useTheme,
@@ -45,16 +46,6 @@ interface HeadCell<T> {
   id: keyof T;
   label: string;
   numeric: boolean;
-}
-
-interface ReusableTableProps<T> {
-  rows: T[];
-  headCells: HeadCell<T>[];
-  title?: string;
-  enableSelect?: boolean;
-  enablePagination?: boolean;
-  enableSorting?: boolean;
-  moduleID: number;
 }
 
 function descendingComparator<T extends { [key: string]: string | number }>(
@@ -171,7 +162,7 @@ function InquiryTable({ rows, headCell }: any) {
   const [orderBy, setOrderBy] = React.useState<any>(headCell[0]?.id);
   const [selected, setSelected] = React.useState<readonly number[]>([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [open, setOpen] = React.useState(false);
   const [startDate, setStartDate] = React.useState("");
   const [endDate, setEndDate] = React.useState("");
@@ -201,24 +192,24 @@ function InquiryTable({ rows, headCell }: any) {
     setSelected([]);
   };
 
-  const handleClick = (event: React.MouseEvent<unknown>, index: number) => {
-    const selectedIndex = selected.indexOf(index);
-    let newSelected: readonly number[] = [];
+  // const handleClick = (event: React.MouseEvent<unknown>, index: number) => {
+  //   const selectedIndex = selected.indexOf(index);
+  //   let newSelected: readonly number[] = [];
 
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, index);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-    setSelected(newSelected);
-  };
+  //   if (selectedIndex === -1) {
+  //     newSelected = newSelected.concat(selected, index);
+  //   } else if (selectedIndex === 0) {
+  //     newSelected = newSelected.concat(selected.slice(1));
+  //   } else if (selectedIndex === selected.length - 1) {
+  //     newSelected = newSelected.concat(selected.slice(0, -1));
+  //   } else if (selectedIndex > 0) {
+  //     newSelected = newSelected.concat(
+  //       selected.slice(0, selectedIndex),
+  //       selected.slice(selectedIndex + 1),
+  //     );
+  //   }
+  //   setSelected(newSelected);
+  // };
 
   const handleChangePage = (
     _event: React.MouseEvent<HTMLElement> | null,
@@ -318,105 +309,109 @@ function InquiryTable({ rows, headCell }: any) {
   return (
     <>
       <Box sx={{ width: "100%", padding: 0 }}>
-        <Grid
-          container
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            // gap: 1,
-          }}
-        ></Grid>
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button
-            size="small"
-            variant="contained"
-            onClick={handleClick2}
-            style={{ cursor: "pointer", margin: "10px 0" }}
-          >
-            Export
-          </Button>
-
-          {isOpen && (
-            <Menu
-              id="msgs-menu"
-              anchorEl={anchorEl2}
-              keepMounted
-              open={Boolean(anchorEl2)}
-              onClose={handleClose2}
-              anchorOrigin={{
-                horizontal: "right",
-                vertical: "bottom",
-              }}
-              transformOrigin={{
-                horizontal: "right",
-                vertical: "top",
-              }}
-              sx={{
-                "& .MuiMenu-paper": {
-                  width: "200px",
-                  color: "#131121",
-                },
-              }}
-            >
-              <MenuItem
-                onClick={() =>
-                  GeneratePDF(
-                    [
-                      "Id",
-                      "name",
-                      "email",
-                      "subject",
-                      "phone_no",
-                      "message",
-                      "created_at",
-                    ],
-                    "Users List",
-                  )
-                }
+        <Stack
+          spacing={2}
+          gap={2}
+          justifyContent={"space-between"}
+          my={2}
+          direction={"row"}
+          alignItems={"center"}
+        >
+          {/* Date Filter Inputs */}
+          <Box display="flex" gap={2} mb={2}>
+            <TextField
+              size="small"
+              label="From Date"
+              type="date"
+              InputLabelProps={{ shrink: true }}
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+            <TextField
+              size="small"
+              label="To Date"
+              type="date"
+              InputLabelProps={{ shrink: true }}
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+            {startDate && endDate && (
+              <Button
+                size="small"
+                color="warning"
+                variant="outlined"
+                onClick={resetFilters}
               >
-                <ListItemText> Export to Pdf </ListItemText>
-              </MenuItem>
-              <MenuItem
-                onClick={(event) =>
-                  ExportDataIntoExcel("Users List", "users sheet")
-                }
-              >
-                <ListItemText> Export To excel </ListItemText>
-              </MenuItem>
-            </Menu>
-          )}
-        </Box>
+                Reset
+              </Button>
+            )}
+          </Box>
 
-        {/* Date Filter Inputs */}
-        <Box display="flex" gap={2} mb={2}>
-          <TextField
-            size="small"
-            label="From Date"
-            type="date"
-            InputLabelProps={{ shrink: true }}
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-          <TextField
-            size="small"
-            label="To Date"
-            type="date"
-            InputLabelProps={{ shrink: true }}
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-          />
-          {startDate && endDate && (
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Button
               size="small"
-              color="warning"
-              variant="outlined"
-              onClick={resetFilters}
+              variant="contained"
+              onClick={handleClick2}
+              style={{
+                cursor: "pointer",
+                margin: "4px 0",
+                backgroundColor: "blue",
+              }}
             >
-              Reset
+              Export
             </Button>
-          )}
-        </Box>
+
+            {isOpen && (
+              <Menu
+                id="msgs-menu"
+                anchorEl={anchorEl2}
+                keepMounted
+                open={Boolean(anchorEl2)}
+                onClose={handleClose2}
+                anchorOrigin={{
+                  horizontal: "right",
+                  vertical: "bottom",
+                }}
+                transformOrigin={{
+                  horizontal: "right",
+                  vertical: "top",
+                }}
+                sx={{
+                  "& .MuiMenu-paper": {
+                    width: "200px",
+                    color: "#131121",
+                  },
+                }}
+              >
+                <MenuItem
+                  onClick={() =>
+                    GeneratePDF(
+                      [
+                        "Id",
+                        "name",
+                        "email",
+                        "subject",
+                        "phone_no",
+                        "message",
+                        "created_at",
+                      ],
+                      "Users List",
+                    )
+                  }
+                >
+                  <ListItemText> Export to Pdf </ListItemText>
+                </MenuItem>
+                <MenuItem
+                  onClick={(event) =>
+                    ExportDataIntoExcel("Users List", "users sheet")
+                  }
+                >
+                  <ListItemText> Export To excel </ListItemText>
+                </MenuItem>
+              </Menu>
+            )}
+          </Box>
+        </Stack>
 
         <TableContainer
           sx={{

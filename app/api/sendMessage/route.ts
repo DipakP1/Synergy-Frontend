@@ -1,6 +1,11 @@
 import { pool } from "../utils/DB_Connections";
 import { sendMail } from "../utils/mail";
 
+// fs.readFile('mailTemplate.html', function (err, data) {
+//   // Display the file content
+//   console.log(data, "HTML DATAAAA");
+// });
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -26,23 +31,22 @@ export async function POST(req: Request) {
     await client.query(query, values);
     client.release();
 
-    await sendMail({
-      email: process.env.SMTP_SERVER_USERNAME!,
-      sendTo: email,
-      subject: "Thank You for Contacting Us!",
-      text: `Hi ${name}, Thank you for reaching out. We will get back to you soon.`,
-      html: `<h3>Hi ${name},</h3>
-             <p>Thank you for reaching out. We have received your message and will get back to you soon.</p>
-             <p><b>Message Details:</b></p>
-             <p><b>Subject:</b> ${subject || "No Subject"}</p>
-             <p><b>Message:</b> ${message}</p>
-             <br/>
-             <p>Best Regards,<br/>Team Synergi</p>`,
-    });
-
+    //SENDER MAIL
     await sendMail({
       email,
+      phoneNo: phoneNo,
       sendTo: process.env.SITE_MAIL_RECEIVER!,
+      name: name,
+      subject: subject,
+      message: message,
+    });
+
+    ///RECIEVER MAIL
+    await sendMail({
+      email: process.env.SMTP_SERVER_USERNAME!,
+      phoneNo: phoneNo,
+      sendTo: email,
+      name: name,
       subject: "New Contact Form Submission",
       text: "A new user has submitted a message.",
       html: `<h3>New Contact Form Submission</h3>

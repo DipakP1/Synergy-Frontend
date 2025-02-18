@@ -46,8 +46,6 @@ function Page() {
     const getEnquiries = async () => {
       try {
         const res = await axios.get("/api/getMessages");
-
-        console.log(res, "RESPONS");
         setEnquiry(res?.data?.data);
       } catch (error) {
         console.error(error, "ERROR GETTING MESSAGES");
@@ -56,7 +54,6 @@ function Page() {
     getEnquiries();
   }, []);
 
-  console.log(enquiry, "enquiry");
   return (
     <Box>
       <Header />
