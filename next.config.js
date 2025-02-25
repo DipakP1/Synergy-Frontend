@@ -3,19 +3,14 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  output: "standalone", // Helps deploy on Netlify
+  output: "standalone", 
   experimental: {
-    appDir: true, // Required for App Router
+    appDir: true, 
   },
   images: {
-    domains: ["localhost"],
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "cdn.sanity.io",
-        port: "",
-      },
-    ],
+    domains: ["https://extraordinary-bunny-15c2aa.netlify.app/"],
+    loader: "default", 
+    unoptimized: true,
   },
   async headers() {
     return [
