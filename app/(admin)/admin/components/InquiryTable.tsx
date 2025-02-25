@@ -39,6 +39,7 @@ import TablePaginationActions from "@mui/material/TablePagination/TablePaginatio
 import { enqueueSnackbar } from "notistack";
 import { exportdataExcel, exportToPdf } from "./Export/exportData";
 import dayjs from "dayjs";
+import { ExportDataIntoExcel, GeneratePDF } from "@/app/lib/Export";
 
 type Order = "asc" | "desc";
 
@@ -267,33 +268,6 @@ function InquiryTable({ rows, headCell }: any) {
     [order, orderBy, page, rowsPerPage, filteredRows],
   );
 
-  const GeneratePDF = async (headers: string[], fileName: string) => {
-    try {
-      if (Array.isArray(rows) && rows.length > 0) {
-        await exportToPdf(rows, "pdf", headers, fileName);
-      } else {
-        enqueueSnackbar("No data Available", {
-          variant: "error",
-        });
-      }
-    } catch (error) {
-      console.log("error:", error);
-    }
-  };
-
-  const ExportDataIntoExcel = async (
-    title?: string,
-    worksheetname?: string,
-  ) => {
-    try {
-      if (Array.isArray(rows) && rows.length > 0) {
-        exportdataExcel(rows, "excel", title, worksheetname);
-      }
-    } catch (error) {
-      console.log("error:", error);
-    }
-  };
-
   const handleClick2 = (event: any) => {
     setAnchorEl2(event.currentTarget);
     setIsOpen((isOpen: any) => !isOpen);
@@ -321,7 +295,15 @@ function InquiryTable({ rows, headCell }: any) {
           <Box display="flex" gap={2} mb={2}>
             <TextField
               size="small"
-              label="From Date"
+              label={
+                <Typography
+                  color="white"
+                  sx={{ backgroundColor: "grey", px: 1, borderRadius: "5px" }}
+                >
+                  From Date
+                </Typography>
+              }
+              sx={{ color: "red", backgroundColor: "lightgrey" }}
               type="date"
               InputLabelProps={{ shrink: true }}
               value={startDate}
@@ -329,7 +311,15 @@ function InquiryTable({ rows, headCell }: any) {
             />
             <TextField
               size="small"
-              label="To Date"
+              label={
+                <Typography
+                  color="white"
+                  sx={{ backgroundColor: "grey", px: 1, borderRadius: "5px" }}
+                >
+                  To Date
+                </Typography>
+              }
+              sx={{ color: "red", backgroundColor: "lightgrey" }}
               type="date"
               InputLabelProps={{ shrink: true }}
               value={endDate}
@@ -396,6 +386,7 @@ function InquiryTable({ rows, headCell }: any) {
                         "created_at",
                       ],
                       "Users List",
+                      rows,
                     )
                   }
                 >
@@ -403,7 +394,7 @@ function InquiryTable({ rows, headCell }: any) {
                 </MenuItem>
                 <MenuItem
                   onClick={(event) =>
-                    ExportDataIntoExcel("Users List", "users sheet")
+                    ExportDataIntoExcel("Users List", "users sheet", rows)
                   }
                 >
                   <ListItemText> Export To excel </ListItemText>

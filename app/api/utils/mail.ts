@@ -40,7 +40,6 @@ export async function sendMail({
       .replace("{{mobilleNo}}", phoneNo)
       .replace("{{message}}", message);
 
-    console.log(htmlContent, "HTML DATA"); // Debugging
 
     await transporter.verify();
 

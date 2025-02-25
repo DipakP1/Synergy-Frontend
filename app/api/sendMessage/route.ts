@@ -33,9 +33,9 @@ export async function POST(req: Request) {
 
     //SENDER MAIL
     await sendMail({
-      email,
+      email: process.env.SMTP_SERVER_USERNAME!,
       phoneNo: phoneNo,
-      sendTo: process.env.SITE_MAIL_RECEIVER!,
+      sendTo: email,
       name: name,
       subject: subject,
       message: message,
@@ -43,9 +43,9 @@ export async function POST(req: Request) {
 
     ///RECIEVER MAIL
     await sendMail({
-      email: process.env.SMTP_SERVER_USERNAME!,
+      email,
       phoneNo: phoneNo,
-      sendTo: email,
+      sendTo: process.env.SITE_MAIL_RECEIVER!,
       name: name,
       subject: "New Contact Form Submission",
       text: "A new user has submitted a message.",
