@@ -3,6 +3,10 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  output: "standalone", // Helps deploy on Netlify
+  experimental: {
+    appDir: true, // Required for App Router
+  },
   images: {
     domains: ["localhost"],
     remotePatterns: [
