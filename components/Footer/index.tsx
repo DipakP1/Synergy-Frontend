@@ -55,7 +55,7 @@ const Footer = () => {
                   href="#"
                   className="text-itemtitle font-medium text-black dark:text-white"
                 >
-                  info@synergi.com
+                  info@synergisoltuions.net
                 </a>
               </motion.div>
 
@@ -201,7 +201,7 @@ const Footer = () => {
                     Subscribe to receive future updates
                   </p>
 
-                  <form action="#">
+                  {/* <form action="#">
                     <div className="relative">
                       <input
                         type="text"
@@ -235,7 +235,7 @@ const Footer = () => {
                         </svg>
                       </button>
                     </div>
-                  </form>
+                  </form> */}
 
                   <div
                     style={{ marginTop: "40px" }}

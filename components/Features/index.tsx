@@ -8,16 +8,16 @@ const Feature = () => {
   return (
     <>
       {/* <!-- ===== Features Start ===== --> */}
-      <section id="features" className="py-20 lg:py-25 xl:py-30">
+      <section id="features" className="py-20 lg:py-25 xl:py-30 mt-10">
         <div className="mx-auto max-w-c-1315 px-4 md:px-8 xl:px-0">
           {/* <!-- Section Title Start --> */}
           <SectionHeader
             headerInfo={{
-              title: "FEATURES OF SYNERGI",
-              subtitle: "Core Features of Synergi",
-            //   description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-            // convallis tortor eros. Donec vitae tortor lacus. Phasellus aliquam
-            // ante in maximus.`,
+              // title: "FEATURES OF SYNERGI",
+              subtitle: "Profitable Healthcare Programs",
+              //   description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+              // convallis tortor eros. Donec vitae tortor lacus. Phasellus aliquam
+              // ante in maximus.`,
             }}
           />
           {/* <!-- Section Title End --> */}

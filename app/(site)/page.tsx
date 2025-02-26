@@ -12,6 +12,7 @@ import Pricing from "@/components/Pricing";
 import Contact from "@/components/Contact";
 import Blog from "@/components/Blog";
 import Testimonial from "@/components/Testimonial";
+import Team from "@/components/Team";
 
 export const metadata: Metadata = {
   title: "Synergi Solutions, LLC",
@@ -27,12 +28,14 @@ export default function Home() {
       <About />
       <FeaturesTab />
       <FunFact />
-      <Integration />
-      <CTA />
-      <FAQ />
+      {/* <Integration /> */}
+      {/* <CTA /> */}
+      <Team />
       <Testimonial />
-      {/* <Pricing /> */}
       <Contact />
+
+      {/* <Pricing /> */}
+       {/* <FAQ /> */}
       {/* <Blog /> */}
     </main>
   );

@@ -258,7 +258,7 @@ const Contact = () => {
                   Email Address
                 </h3>
                 <p>
-                  <a href="#">info@synergy.com</a>
+                  <a href="#">info@synergisoltuions.net</a>
                 </p>
               </div>
               <div>
