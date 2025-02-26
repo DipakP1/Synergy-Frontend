@@ -31,7 +31,7 @@ export default function Home() {
       {/* <Integration /> */}
       {/* <CTA /> */}
       <Team />
-      <Testimonial />
+      {/* <Testimonial /> */}
       <Contact />
 
       {/* <Pricing /> */}
