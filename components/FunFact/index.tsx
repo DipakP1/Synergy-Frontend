@@ -194,7 +194,7 @@ const FunFact = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.1 }}
-            className="rounded-lg bg-white p-6 text-center shadow-md dark:bg-gray-900"
+            className="rounded-lg bg-white p-6 text-center shadow-md dark:border-strokedark dark:bg-blacksection"
           >
             {/* <h3 className="text-3xl font-bold text-blue-600">95%</h3> */}
             <Image
@@ -214,7 +214,7 @@ const FunFact = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="rounded-lg bg-white p-6 text-center shadow-md dark:bg-gray-900"
+            className="rounded-lg bg-white p-6 text-center shadow-md dark:border-strokedark dark:bg-blacksection"
           >
             <Image
               src="/images/3.png"
@@ -232,7 +232,7 @@ const FunFact = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="rounded-lg bg-white p-6 text-center shadow-md dark:bg-gray-900"
+            className="rounded-lg bg-white p-6 text-center shadow-md dark:border-strokedark dark:bg-blacksection"
           >
             <Image
               src="/images/4.png"
@@ -241,14 +241,16 @@ const FunFact = () => {
               height={30}
               className="mx-auto"
             />
-            <p className="mt-2 text-gray-700 dark:text-gray-200 ">Income increased per owner</p>
+            <p className="mt-2 text-gray-700 dark:text-gray-200 ">
+              Income increased per owner
+            </p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.7 }}
-            className="rounded-lg bg-white p-6 text-center shadow-md dark:bg-gray-900"
+            className="rounded-lg bg-white p-6 text-center shadow-md dark:border-strokedark dark:bg-blacksection"
           >
             {/* <h3 className="text-3xl font-bold text-blue-600">$240,000</h3> */}
             <Image

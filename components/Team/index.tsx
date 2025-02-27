@@ -6,7 +6,7 @@ import { teamMembers } from "./TeamData";
 
 const Team = () => {
   return (
-    <section className="bg-white dark:bg-gray-900">
+    <section className="bg-white dark:bg-black">
       <div className="mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-16 ">
         <div className="mx-auto mb-8 max-w-screen-sm text-center lg:mb-16">
           <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">

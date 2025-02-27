@@ -64,8 +64,8 @@ const Signin = () => {
   return (
     <>
       {/* <!-- ===== SignIn Form Start ===== --> */}
-
       <section className="pb-12.5 pt-32.5 lg:pb-25 lg:pt-45 xl:pb-30 xl:pt-50">
+        
         <div className="relative z-1 mx-auto max-w-c-1016 px-7.5 pb-7.5 pt-10 lg:px-15 lg:pt-15 xl:px-20 xl:pt-20">
           <div className="absolute left-0 top-0 -z-1 h-2/3 w-full rounded-lg bg-gradient-to-t from-transparent to-[#dee7ff47] dark:bg-gradient-to-t dark:to-[#252A42]"></div>
           <div className="absolute bottom-17.5 left-0 -z-1 h-1/3 w-full">
@@ -144,7 +144,8 @@ const Signin = () => {
                       id="hs-toggle-password-checkbox"
                       type="checkbox"
                       onClick={handleClickShowPassword}
-                      checked={showPassword1}
+                      // checked={showPassword1 ? true : false}
+                      defaultChecked={showPassword1}
                       className="mt-0.5 shrink-0 rounded border-gray-200 text-blue-600 focus:ring-blue-500 dark:border-neutral-700 dark:bg-neutral-800 dark:checked:border-blue-500 dark:checked:bg-blue-500 dark:focus:ring-offset-gray-800"
                     />
                     <label
