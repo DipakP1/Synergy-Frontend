@@ -14,13 +14,15 @@ import { enqueueSnackbar } from "notistack";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
+const ENV = process.env.NEXT_PUBLIC_BACKEND_URL;
+
 const RecoverPassword = ({ open, close }: any) => {
   const { register, watch, handleSubmit, reset } = useForm();
 
   const [emailOrUsername, setEmailOrUsername] = useState("");
 
   const submitHandler = async (data: any) => {
-    const res = await axios.post("/api/login/forgotPassword", data);
+    const res = await axios.post(`${ENV}/api/login/forgotPassword`, data);
 
     if (!res?.data?.error) {
       enqueueSnackbar(res.data?.message, { variant: "success" });

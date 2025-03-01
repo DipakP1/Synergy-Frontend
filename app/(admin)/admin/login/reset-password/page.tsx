@@ -8,14 +8,16 @@ import ResetPass from "./ResetPass";
 const secretKey: any = process.env.SECRET_KEY;
 
 const page = async ({ searchParams }: any) => {
-  const id = searchParams?.id;
+  const id = await searchParams?.id;
 
   if (!id) {
     return <p>Error: Missing ID in URL</p>;
   }
   const crypto = new NextCrypto(secretKey);
 
+
   const decrypted = await crypto.decrypt(id);
+  console.log(decrypted, "IDDD");
 
   return <ResetPass id={decrypted} />;
 };

@@ -39,7 +39,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "app/(admin)/admin/login", "app/(admin)/admin/dashboard/change-password"  ],
+, "app/(admin)/admin/login", "app/(admin)/admin/components/change-password"  ],
   "exclude": [
     "node_modules"
   ]

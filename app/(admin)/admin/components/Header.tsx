@@ -20,14 +20,18 @@ import axios from "axios";
 import { enqueueSnackbar } from "notistack";
 import Image from "next/image";
 import ThemeToggler from "@/components/Header/ThemeToggler";
+import ChangePass from "./change-password/ChangePass";
+import { Divider } from "@mui/material";
 
 const pages = ["Super Admin", "Dashboard"];
 
-const Header = () => {
+const Header = ({ userData, TOKEN }) => {
   const router = useRouter();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
   );
+  const [open, setOpen] = React.useState(false);
+
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null,
   );
@@ -47,6 +51,9 @@ const Header = () => {
     setAnchorElUser(null);
   };
 
+  const closeDialog = () => {
+    setOpen(false);
+  };
   return (
     <AppBar sx={{ backgroundColor: "#cfd6f959" }} position="static">
       <Container maxWidth="xl">
@@ -98,7 +105,15 @@ const Header = () => {
             </Typography> */}
           </Box>
 
-          <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center", gap:2,justifyContent:"space-between" }}>
+          <Box
+            sx={{
+              flexGrow: 0,
+              display: "flex",
+              alignItems: "center",
+              gap: 2,
+              justifyContent: "space-between",
+            }}
+          >
             <ThemeToggler />
 
             <Box ml={2}>
@@ -107,6 +122,7 @@ const Header = () => {
                   <Avatar alt="Remy Sharp" src="/images/user/user-3.png" />
                 </IconButton>
               </Tooltip>
+
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
@@ -123,9 +139,17 @@ const Header = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
+                <Box my={1} px={2}>
+                  <Typography sx={{ textAlign: "center" }}>
+                    Welcome,{" "}
+                    <span style={{ color: "blue" }}>{userData?.email}</span>
+                  </Typography>
+                </Box>
+                <Divider />
                 <MenuItem
                   onClick={() =>
-                    router.push("/admin/dashboard/change-password")
+                    // router.push("/admin/dashboard/change-password")
+                    setOpen(true)
                   }
                 >
                   <Typography sx={{ textAlign: "center" }}>
@@ -153,6 +177,13 @@ const Header = () => {
           </Box>
         </Toolbar>
       </Container>
+
+      <ChangePass
+        open={open}
+        close={closeDialog}
+        email={userData?.email}
+        TOKEN={TOKEN}
+      />
     </AppBar>
   );
 };

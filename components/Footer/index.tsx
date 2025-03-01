@@ -164,11 +164,11 @@ const Footer = () => {
                   className="animate_top"
                 >
                   <h4 className="mb-9 text-itemtitle2 font-medium text-black dark:text-white">
-                    Newsletter
+                    Demo
                   </h4>
-                  <p className="mb-4 w-[90%]">
+                  {/* <p className="mb-4 w-[90%]">
                     Subscribe to receive future updates
-                  </p>
+                  </p> */}
 
                   {/* <form action="#">
                     <div className="relative">

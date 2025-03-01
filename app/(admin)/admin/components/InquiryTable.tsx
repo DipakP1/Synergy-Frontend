@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
@@ -8,9 +9,6 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { visuallyHidden } from "@mui/utils";
 import {
   Button,
@@ -28,26 +26,15 @@ import {
   useTheme,
 } from "@mui/material";
 import { CustomPagination, CustomPaginationNumber } from "./TablePagination";
-import Grid from "@mui/material/Grid2";
-import { usePathname, useRouter } from "next/navigation";
-import InputAdornment from "@mui/material/InputAdornment";
-import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import ViewUserMessage from "./ViewUserMessage";
-import TablePaginationActions from "@mui/material/TablePagination/TablePaginationActions";
-import { enqueueSnackbar } from "notistack";
-import { exportdataExcel, exportToPdf } from "./Export/exportData";
+
 import dayjs from "dayjs";
 import { ExportDataIntoExcel, GeneratePDF } from "@/app/lib/Export";
+import axios from "axios";
+
+const ENV = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 type Order = "asc" | "desc";
-
-interface HeadCell<T> {
-  id: keyof T;
-  label: string;
-  numeric: boolean;
-}
 
 function descendingComparator<T extends { [key: string]: string | number }>(
   a: T,
@@ -158,7 +145,41 @@ function EnhancedTableHead<T>({
   );
 }
 
-function InquiryTable({ rows, headCell }: any) {
+function InquiryTable() {
+  const headCell = [
+    {
+      id: "id",
+      label: "#",
+    },
+    {
+      id: "name",
+      label: "User Name",
+    },
+    {
+      id: "email",
+      label: "Email ID",
+    },
+    {
+      id: "phone_no",
+      label: "Mobile No",
+    },
+    {
+      id: "subject",
+      label: "Subject",
+    },
+    {
+      id: "message",
+      label: "Message",
+    },
+    {
+      id: "created_at",
+      label: "Date",
+    },
+    // {
+    //   id: "action",
+    //   label: "Action",
+    // },
+  ];
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<any>(headCell[0]?.id);
   const [selected, setSelected] = React.useState<readonly number[]>([]);
@@ -170,7 +191,7 @@ function InquiryTable({ rows, headCell }: any) {
   const [selectedUser, setSelectedUser] = React.useState({});
   const [anchorEl2, setAnchorEl2] = React.useState(null);
   const [isOpen, setIsOpen] = React.useState(false);
-
+  const [rows, setEnquiry] = React.useState<any>([]);
   const handleCloseEditDialog = () => {
     setOpen(false);
   };
@@ -280,6 +301,17 @@ function InquiryTable({ rows, headCell }: any) {
     setEndDate("");
   };
 
+  React.useEffect(() => {
+    const getMessageData = async () => {
+      try {
+        const res = await axios.get(`${ENV}/api/getMessages`);
+        setEnquiry(res.data?.data);
+      } catch (error) {
+        console.error(error, "Error getting Messages");
+      }
+    };
+    getMessageData();
+  }, []);
   return (
     <>
       <Box sx={{ width: "100%", padding: 0 }}>
