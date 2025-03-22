@@ -2,8 +2,11 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { Dialog } from "@headlessui/react";
 
 const Footer = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <footer className="border-t border-stroke bg-white dark:border-strokedark dark:bg-blacksection">
@@ -39,7 +42,7 @@ const Footer = () => {
                     height={90}
                     src="/images/logo/logo.png"
                     alt="Logo"
-                    // className="dark:hidden"
+                  // className="dark:hidden"
                   />
                   {/* Synergi */}
                 </a>
@@ -92,14 +95,14 @@ const Footer = () => {
                         Home
                       </a>
                     </li>
-                    <li>
+                    {/* <li>
                       <a
                         href="#"
                         className="mb-3 inline-block hover:text-primary"
                       >
                         Product
                       </a>
-                    </li>
+                    </li> */}
                   </ul>
                 </motion.div>
 
@@ -126,14 +129,14 @@ const Footer = () => {
                   </h4>
 
                   <ul>
-                    <li>
+                    {/* <li>
                       <a
                         href="#"
                         className="mb-3 inline-block hover:text-primary"
                       >
                         Solution
                       </a>
-                    </li>
+                    </li> */}
                     <li>
                       <a
                         href="#"
@@ -245,19 +248,12 @@ const Footer = () => {
             >
               <ul className="flex items-center gap-8">
                 <li>
-                  <a href="#" className="hover:text-primary">
-                    English
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-primary">
+                  <button
+                    onClick={() => setIsOpen(true)}
+                    className="hover:text-primary"
+                  >
                     Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-primary">
-                    Support
-                  </a>
+                  </button>
                 </li>
               </ul>
             </motion.div>
@@ -402,6 +398,19 @@ const Footer = () => {
           {/* <!-- Footer Bottom --> */}
         </div>
       </footer>
+
+      {/* Modal for Privacy Policy */}
+      <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-[90%] max-w-lg">
+          <Dialog.Title className="text-xl font-bold">Privacy Policy</Dialog.Title>
+          <p className="mt-4 text-gray-600 dark:text-gray-300">
+            This is the Privacy Policy content. You can customize this with your actual policy details.
+          </p>
+          <button onClick={() => setIsOpen(false)} className="mt-4 px-4 py-2 bg-primary text-white rounded">
+            Close
+          </button>
+        </div>
+      </Dialog>
     </>
   );
 };

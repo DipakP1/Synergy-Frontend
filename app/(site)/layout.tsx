@@ -12,6 +12,8 @@ const inter = Inter({ subsets: ["latin"] });
 import ToasterContext from "../context/ToastContext";
 import { useEffect, useState } from "react";
 import { SnackbarProvider } from "notistack";
+import Home from "./page";
+import ChatBot from "@/components/ChatBot/page";
 
 export default function RootLayout({
   children,
@@ -32,6 +34,7 @@ export default function RootLayout({
           <ToasterContext />
           {children}
           <Footer />
+          {/* <ChatBot /> */}
           <ScrollToTop />
         </ThemeProvider>
       </body>

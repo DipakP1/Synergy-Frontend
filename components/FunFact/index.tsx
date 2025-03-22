@@ -182,9 +182,9 @@ const FunFact = () => {
           whileInView="visible"
           transition={{ duration: 1, delay: 0.1 }}
           viewport={{ once: true }}
-          className="mx-auto mb-12.5 px-4 text-center md:w-4/5 md:px-0 lg:mb-17.5 lg:w-2/3 xl:w-1/2"
+          className="mx-auto mb-12.5 px-4 text-center md:w-2/3 md:px-0 lg:mb-17.5 lg:w-2/3 xl:w-2/3"
         >
-          <h2 className="mb-4 text-3xl font-bold text-gray-900 dark:text-white xl:text-sectiontitle3">
+          <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white xl:text-sectiontitle4">
             Trusted by Healthcare Providers Nationwide
           </h2>
         </motion.div>
@@ -206,7 +206,7 @@ const FunFact = () => {
             />
 
             <p className="mt-2 text-gray-700 dark:text-gray-200">
-              of all owners saw an increase in earnings
+              image use the point UP arrow
             </p>
           </motion.div>
 
@@ -224,7 +224,7 @@ const FunFact = () => {
               className="mx-auto"
             />
             <p className="mt-2 text-gray-700 dark:text-gray-200">
-              Average owner income more than doubled after they engaged with DM
+              Average Owner income more than doubled after they engaged with Synergi
             </p>
           </motion.div>
 

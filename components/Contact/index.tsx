@@ -99,7 +99,7 @@ const Contact = () => {
                       placeholder="Full name"
                       {...register("name", { required: "Name is required" })}
                       className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-none dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-full"
-                      // error={!!error?.name}
+                    // error={!!error?.name}
                     />
                     <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
                       {error?.name?.message}
@@ -251,14 +251,15 @@ const Contact = () => {
                 <h3 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
                   Our Loaction
                 </h3>
-                <p>439 University Avenue, 5th Floor Toronto, ON M5G 1Y8</p>
+                <p>Austin, TX  Los Angeles, CA Boston, MA</p>
               </div>
               <div className="5 mb-7">
                 <h3 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
                   Email Address
                 </h3>
                 <p>
-                  <a href="#">info@synergisoltuions.net</a>
+                  <a href="#">info@synergisoltuions.net
+                  </a>
                 </p>
               </div>
               <div>
@@ -266,7 +267,7 @@ const Contact = () => {
                   Phone Number
                 </h4>
                 <p>
-                  <a href="#">+1 919 410-3481</a>
+                  <a href="#">8339047746</a>
                 </p>
               </div>
             </motion.div>

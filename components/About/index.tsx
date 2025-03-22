@@ -26,16 +26,16 @@ const About = () => {
               whileInView="visible"
               transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true }}
-              className="animate_left relative mx-auto hidden aspect-[588/526.5] md:block md:w-1/2"
+              className="animate_left relative mx-auto hidden aspect-[588/526.5] md:block md:w-1/3"
             >
               <Image
-                src="/images/about/about-light-01.png"
+                src="/images/about/1.jpg"
                 alt="About"
                 className="dark:hidden"
                 fill
               />
               <Image
-                src="/images/about/about-dark-01.png"
+                src="/images/about/1.jpg"
                 alt="About"
                 className="hidden dark:block"
                 fill
@@ -240,16 +240,16 @@ const About = () => {
               whileInView="visible"
               transition={{ duration: 1, delay: 0.1 }}
               viewport={{ once: true }}
-              className="animate_right relative mx-auto hidden aspect-[588/526.5] md:block md:w-1/2"
+              className="animate_right relative mx-auto hidden aspect-[588/526.5] md:block md:w-1/3"
             >
               <Image
-                src="./images/about/about-light-02.svg"
+                src="./images/about/2.jpg"
                 alt="About"
                 className="dark:hidden"
                 fill
               />
               <Image
-                src="./images/about/about-dark-02.svg"
+                src="./images/about/2.jpg"
                 alt="About"
                 className="hidden dark:block"
                 fill

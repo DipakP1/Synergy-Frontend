@@ -10,7 +10,7 @@ const Team = () => {
       <div className="mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-16 ">
         <div className="mx-auto mb-8 max-w-screen-sm text-center lg:mb-16">
           <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-            Our Team
+            Synergi Team
           </h2>
           {/* <p className="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">Explore the whole collection of open-source web components and elements built with the utility classNamees from Tailwind</p> */}
         </div>
@@ -32,33 +32,29 @@ const Team = () => {
           viewport={{ once: true }}
           className="animate_left"
         >
-          <div className="mb-6 grid gap-8 md:grid-cols-2 lg:mb-16">
-            {teamMembers.map((member: any, index: number) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {teamMembers.map((member) => (
               <div
-                key={index}
-                className="items-center rounded-xl bg-gray-100 shadow dark:border-gray-700 dark:bg-gray-800 sm:flex"
+                key={member.name}
+                className="flex items-center bg-slate-100 p-6 rounded-xl shadow-md"
               >
-                <a href="#">
+                {/* Left Side Image */}
+                <div className="flex-shrink-0 w-24 h-24">
                   <Image
-                    width={100}
-                    height={50}
-                    className="rounded-lg sm:rounded-none sm:rounded-l-lg ml-2 mr-1"
+                    width={96}
+                    height={96}
+                    className="w-full h-full object-cover rounded-full"
                     src={member.image}
-                    alt="Bonnie Avatar"
+                    alt={member.name}
                   />
-                </a>
-                <div className="p-5">
-                  <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    <a href="#">{member?.name}</a>
-                  </h3>
-                  <span className="text-gray-500 dark:text-gray-400">
-                    {member?.role}
-                  </span>
-                  <p className="mb-4 mt-3 font-light text-gray-500 dark:text-gray-400">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quam, facilis.
-                  </p>
-                  <ul className="flex space-x-4 sm:mt-0">
+                </div>
+
+                {/* Right Side Content */}
+                <div className="ml-4 flex-1">
+                  <h3 className="text-lg font-extrabold">{member.name}</h3>
+                  <p className="text-gray-500 text-sm">{member.role}</p>
+                  <p className="text-gray-400 mt-2">{member.desc}</p>
+                  {/* <ul className="flex space-x-4 sm:mt-0">
                     <li>
                       <a
                         href="#"
@@ -131,12 +127,16 @@ const Team = () => {
                         </svg>
                       </a>
                     </li>
-                  </ul>
+                  </ul> */}
                 </div>
+
+
               </div>
             ))}
           </div>
+
         </motion.div>
+
       </div>
     </section>
   );

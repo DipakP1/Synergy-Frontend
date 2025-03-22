@@ -181,6 +181,11 @@ const LatestNews = () => {
 
   return (
     <section className="relative pb-20 pt-18.5 lg:pb-22.5">
+      <div className="mx-auto mb-8 max-w-screen-sm text-center lg:mb-16 mt-12">
+        <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+          Latest News
+        </h2>
+      </div>
       <div className="relative mx-auto max-w-c-1390 px-4 md:px-8 2xl:px-0">
         <motion.div
           variants={{
@@ -197,11 +202,10 @@ const LatestNews = () => {
             <div
               key={news.id}
               onClick={() => setCurrentTab(news.id)}
-              className={`relative flex w-full cursor-pointer items-center gap-4 border-b border-stroke px-6 py-2 last:border-0 dark:border-strokedark md:w-auto md:border-0 xl:px-13.5 xl:py-5 ${
-                currentTab === news.id
-                  ? "active before:absolute before:bottom-0 before:left-0 before:h-1 before:w-full before:bg-primary"
-                  : ""
-              }`}
+              className={`relative flex w-full cursor-pointer items-center gap-4 border-b border-stroke px-6 py-2 last:border-0 dark:border-strokedark md:w-auto md:border-0 xl:px-13.5 xl:py-5 ${currentTab === news.id
+                ? "active before:absolute before:bottom-0 before:left-0 before:h-1 before:w-full before:bg-primary"
+                : ""
+                }`}
             >
               <div className="flex h-12.5 w-12.5 items-center justify-center rounded-full border border-stroke dark:border-strokedark dark:bg-blacksection">
                 <p className="text-metatitle3 font-medium text-black dark:text-white">
