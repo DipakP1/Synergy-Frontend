@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
+import PrivacyPolicy from "./Policy";
 
 const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -403,9 +404,8 @@ const Footer = () => {
       <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="fixed inset-0 flex items-center justify-center z-50">
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-[90%] max-w-lg">
           <Dialog.Title className="text-xl font-bold">Privacy Policy</Dialog.Title>
-          <p className="mt-4 text-gray-600 dark:text-gray-300">
-            This is the Privacy Policy content. You can customize this with your actual policy details.
-          </p>
+          {/* This is the Privacy Policy content. You can customize this with your actual policy details. */}
+          <PrivacyPolicy />
           <button onClick={() => setIsOpen(false)} className="mt-4 px-4 py-2 bg-primary text-white rounded">
             Close
           </button>
